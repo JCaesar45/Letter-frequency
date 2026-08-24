@@ -1,4 +1,3 @@
-```markdown
 # Aurum Conversion OS
 
 A closed-loop presentation layer and lead intake system.
