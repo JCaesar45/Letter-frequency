@@ -1,0 +1,95 @@
+{
+  "name": "Aurum Conversion OS",
+  "positioning": "Luxury conversion system for independent operators",
+  "audience": [
+    "independent contractors",
+    "bout agencies",
+    "consultants",
+    "high-ticket service providers",
+    "product teams"
+  ],
+  "stack": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Python",
+    "TypeScript",
+    "Java"
+  ],
+  "modules": [
+    {
+      "name": "Luxury Interface",
+      "detail": "Dark gold art direction, glass panels, motion, and responsive layout."
+    },
+    {
+      "name": "Conversion Algorithm",
+      "detail": "Lead scoring and revenue modeling with deterministic rules."
+    },
+    {
+      "name": "API Surface",
+      "detail": "Python, TypeScript, and Java services for lead capture and health checks."
+    },
+    {
+      "name": "Product Architecture",
+      "detail": "JSON product tree, offer ladder, and exportable project bundle."
+    },
+    {
+      "name": "Ops Handoff",
+      "detail": "README, run commands, and references for each stack."
+    },
+    {
+      "name": "Security Baseline",
+      "detail": "Input clamping, validation, CORS headers, and JSON escaping."
+    }
+  ],
+  "offers": [
+    {
+      "id": "vanguard",
+      "name": "Vanguard",
+      "tagline": "Entry point for a focused conversion asset.",
+      "price": 4900,
+      "cycle": "build",
+      "features": [
+        "Combined front-end page",
+        "Lead scoring module",
+        "Revenue model",
+        "Static deployment ready"
+      ]
+    },
+    {
+      "id": "sovereign",
+      "name": "Sovereign",
+      "tagline": "Full front-end plus API integration and lead routing.",
+      "price": 12900,
+      "cycle": "build",
+      "featured": true,
+      "features": [
+        "Everything in Vanguard",
+        "Python API",
+        "TypeScript API",
+        "Java API",
+        "Product structure export"
+      ]
+    },
+    {
+      "id": "dynasty",
+      "name": "Dynasty",
+      "tagline": "Private implementation, tuning, and conversion support.",
+      "price": 29500,
+      "cycle": "quarter",
+      "features": [
+        "Everything in Sovereign",
+        "Offer ladder tuning",
+        "Analytics alignment",
+        "Deployment support",
+        "Priority iteration"
+      ]
+    }
+  ],
+  "kpis": [
+    "lead score",
+    "projected net revenue",
+    "offer recommendation",
+    "confidence index"
+  ]
+}
