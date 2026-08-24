@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Aurum Conversion OS: luxury high-conversion front end, revenue algorithm, and multi-runtime backend bundle.">
+  <title>Aurum Conversion OS</title>
+  <style>
+    :root {
+      --bg: #05070d;
+      --ink: #f5efe3;
+      --muted: #a79f8e;
+      --gold: #d7b36a;
+      --gold-2: #f2dfad;
+      --bronze: #8f6b2f;
+      --line: rgba(215, 179, 106, 0.22);
+      --glass: rgba(10, 13, 20, 0.55);
+      --radius: 24px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(215, 179, 106, 0.16), transparent 32%),
+        radial-gradient(circle at top right, rgba(59, 91, 133, 0.22), transparent 30%),
+        linear-gradient(180deg, #05070d, #080b12 55%, #05070d);
+      overflow-x: hidden;
+    }
+
+    #luxCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 40vw;
+      height: 40vw;
+      left: -10vw;
+      top: -10vw;
+      background: radial-gradient(circle, rgba(215, 179, 106, 0.55), transparent 70%);
+    }
+
+    .orb-2 {
+      width: 34vw;
+      height: 34vw;
+      right: -8vw;
+      top: 18vh;
+      background: radial-gradient(circle, rgba(92, 132, 190, 0.42), transparent 72%);
+    }
+
+    .orb-3 {
+      width: 30vw;
+      height: 30vw;
+      left: 24vw;
+      bottom: -12vw;
+      background: radial-gradient(circle, rgba(143, 107, 47, 0.44), transparent 70%);
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 4vw;
+      background: linear-gradient(90deg, rgba(5, 7, 13, 0.88), rgba(5, 7, 13, 0.58));
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #191104;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--bronze));
+      font-family: "Playfair Display", "Didot", "Bodoni MT", serif;
+      font-size: 1.3rem;
+      box-shadow: 0 10px 24px rgba(215, 179, 106, 0.24);
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover {
+      color: var(--gold-2);
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .btn-solid {
+      color: #191104;
+      background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--bronze));
+      box-shadow: 0 10px 30px rgba(215, 179, 106, 0.28);
+    }
+
+    .btn-solid:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .full {
+      width: 100%;
+    }
+
+    main {
+      padding-top: 96px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 130px 4vw 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--gold-2);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.92rem;
+    }
+
+    h1 {
+      margin: 18px 0;
+      font-size: clamp(3rem, 7vw, 7rem);
+      line-height: 0.92;
+      font-family: "Playfair Display", "Didot", "Bodoni MT", serif;
+    }
+
+    .gold-text {
+      background: linear-gradient(90deg, var(--gold-2), var(--gold), var(--bronze));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lede {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .proof-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .proof-item {
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .panel {
+      background: var(--glass);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .hero-panel,
+    .form-panel,
+    .result-panel {
+      padding: 28px;
+    }
+
+    .hero-panel h2,
+    .result-panel h3 {
+      margin-top: 0;
+      font-family: "Playfair Display", "Didot", "Bodoni MT", serif;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: 2px solid rgba(215, 179, 106, 0.35);
+      border-color: var(--gold);
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .result {
+      min-height: 24px;
+      color: var(--gold-2);
+      font-weight: 600;
+    }
+
+    .section {
+      padding: 96px 4vw;
+    }
+
+    .section-head {
+      max-width: 1300px;
+      margin: 0 auto 34px;
+    }
+
+    .section-head h2 {
+      margin: 10px 0 0;
+      font-size: clamp(2.2rem, 4vw, 4.2rem);
+      font-family: "Playfair Display", "Didot", "Bodoni MT", serif;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .card {
+      padding: 26px;
+      min-height: 180px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .offer-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .offer-card .btn {
+      margin-top: auto;
+    }
+
+    .featured {
+      border-color: rgba(215, 179, 106, 0.62);
+      box-shadow: 0 24px 70px rgba(215, 179, 106, 0.14);
+    }
+
+    .badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(215, 179, 106, 0.14);
+      border: 1px solid var(--line);
+      color: var(--gold-2);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      margin: 0;
+      color: var(--muted);
+      min-height: 44px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .cycle {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .feature-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .engine-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 22px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .stat-list {
+      margin: 0;
+      display: grid;
+      gap: 18px;
+    }
+
+    .stat-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+    }
+
+    .stat-list dt {
+      color: var(--muted);
+    }
+
+    .stat-list dd {
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .meter {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      margin-top: 22px;
+    }
+
+    .meter span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold-2), var(--gold));
+      transition: width 0.4s ease;
+    }
+
+    .fineprint {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .cta-panel {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 42px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    footer {
+      padding: 30px 4vw 50px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 1050px) {
+      .nav {
+        display: none;
+      }
+
+      .hero-grid,
+      .engine-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .site-header {
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="luxCanvas" aria-hidden="true"></canvas>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <span class="brand-mark">A</span>
+        <span class="brand-name">Aurum Conversion OS</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#product">Product</a>
+        <a href="#engine">Engine</a>
+        <a href="#offers">Offers</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button id="downloadZip" class="btn btn-solid" type="button">Download Project ZIP</button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Independent contractor-grade conversion system</p>
+            <h1>Sell with <span class="gold-text">precision</span>. Close with <span class="gold-text">authority</span>.</h1>
+            <p class="lede">
+              Aurum Conversion OS pairs a luxury front end with a measurable revenue engine.
+              It scores leads, models lifecycle value, recommends the right offer, and exports
+              a full multi-runtime project bundle.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-solid" href="#contact">Request Private Build</a>
+              <a class="btn btn-ghost" href="#engine">Run Revenue Model</a>
+            </div>
+
+            <div class="proof-strip">
+              <div class="proof-item">12 conversion modules</div>
+              <div class="proof-item">3 backend runtimes</div>
+              <div class="proof-item">1 exportable bundle</div>
+            </div>
+          </div>
+
+          <div class="hero-panel panel reveal">
+            <h2>Instant lead score</h2>
+            <form id="leadForm" novalidate>
+              <div class="field">
+                <label for="leadName">Name</label>
+                <input id="leadName" type="text" placeholder="Jordan Belfort" autocomplete="name">
+              </div>
+
+              <div class="field">
+                <label for="leadEmail">Email</label>
+                <input id="leadEmail" type="email" placeholder="closer@aurum.capital" autocomplete="email">
+              </div>
+
+              <div class="field">
+                <label for="leadBudget">Budget (USD)</label>
+                <input id="leadBudget" type="number" min="0" step="1000" value="25000">
+              </div>
+
+              <div class="field-grid">
+                <div class="field">
+                  <label for="leadUrgency">Urgency</label>
+                  <input id="leadUrgency" type="range" min="1" max="10" value="9">
+                </div>
+
+                <div class="field">
+                  <label for="leadAuthority">Authority</label>
+                  <input id="leadAuthority" type="range" min="1" max="10" value="8">
+                </div>
+              </div>
+
+              <button class="btn btn-solid full" type="submit">Score Lead</button>
+              <p id="leadResult" class="result" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="product" class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">Product structure</p>
+          <h2>Modular system</h2>
+        </div>
+        <div id="moduleGrid" class="grid-3"></div>
+      </section>
+
+      <section id="engine" class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">Algorithm</p>
+          <h2>Revenue engine</h2>
+        </div>
+
+        <div class="engine-grid">
+          <div class="panel form-panel reveal">
+            <div class="field">
+              <label for="traffic">Monthly visitors</label>
+              <input id="traffic" type="number" min="0" value="45000">
+            </div>
+
+            <div class="field">
+              <label for="conversionRate">Conversion rate %</label>
+              <input id="conversionRate" type="number" min="0" max="100" step="0.1" value="2.4">
+            </div>
+
+            <div class="field">
+              <label for="aov">Average order value</label>
+              <input id="aov" type="number" min="0" step="50" value="1800">
+            </div>
+
+            <div class="field">
+              <label for="repeatRate">Repeat purchase rate %</label>
+              <input id="repeatRate" type="number" min="0" max="100" value="18">
+            </div>
+
+            <div class="field">
+              <label for="margin">Profit margin %</label>
+              <input id="margin" type="number" min="0" max="100" value="62">
+            </div>
+          </div>
+
+          <div class="panel result-panel reveal">
+            <h3>Projected monthly economics</h3>
+            <dl class="stat-list">
+              <div>
+                <dt>First purchase revenue</dt>
+                <dd id="firstRevenue">$0</dd>
+              </div>
+              <div>
+                <dt>Lifecycle revenue</dt>
+                <dd id="grossRevenue">$0</dd>
+              </div>
+              <div>
+                <dt>Net profit estimate</dt>
+                <dd id="netRevenue">$0</dd>
+              </div>
+              <div>
+                <dt>Recommended offer</dt>
+                <dd id="planRecommendation">Vanguard</dd>
+              </div>
+            </dl>
+
+            <div class="meter" aria-hidden="true">
+              <span id="confidenceBar"></span>
+            </div>
+            <p class="fineprint">Model uses a conservative lifecycle multiplier and clamped inputs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="offers" class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">Offers</p>
+          <h2>Choose the level of pressure</h2>
+        </div>
+        <div id="offerGrid" class="grid-3"></div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="panel cta-panel reveal">
+          <div>
+            <p class="eyebrow">Private implementation</p>
+            <h2>Deploy the room-closer.</h2>
+            <p class="lede">
+              For operators who want a polished conversion surface, measurable lead routing,
+              and a clean handoff bundle.
+            </p>
+          </div>
+          <a href="mailto:studio@example.com" class="btn btn-solid">Email the desk</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>Aurum Conversion OS</div>
+      <div>HTML + CSS + JavaScript + Python + TypeScript + Java</div>
+    </footer>
+  </div>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+
+    const PRODUCT_STRUCTURE = {
+      name: "Aurum Conversion OS",
+      positioning: "Luxury conversion system for independent operators",
+      audience: [
+        "independent contractors",
+        "bout agencies",
+        "consultants",
+        "high-ticket service providers",
+        "product teams"
+      ],
+      stack: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python",
+        "TypeScript",
+        "Java"
+      ],
+      modules: [
+        {
+          name: "Luxury Interface",
+          detail: "Dark gold art direction, glass panels, motion, and responsive layout."
+        },
+        {
+          name: "Conversion Algorithm",
+          detail: "Lead scoring and revenue modeling with deterministic rules."
+        },
+        {
+          name: "API Surface",
+          detail: "Python, TypeScript, and Java services for lead capture and health checks."
+        },
+        {
+          name: "Product Architecture",
+          detail: "JSON product tree, offer ladder, and exportable project bundle."
+        },
+        {
+          name: "Ops Handoff",
+          detail: "README, run commands, and references for each stack."
+        },
+        {
+          name: "Security Baseline",
+          detail: "Input clamping, validation, CORS headers, and JSON escaping."
+        }
+      ],
+      offers: [
+        {
+          id: "vanguard",
+          name: "Vanguard",
+          tagline: "Entry point for a focused conversion asset.",
+          price: 4900,
+          cycle: "build",
+          features: [
+            "Combined front-end page",
+            "Lead scoring module",
+            "Revenue model",
+            "Static deployment ready"
+          ]
+        },
+        {
+          id: "sovereign",
+          name: "Sovereign",
+          tagline: "Full front-end plus API integration and lead routing.",
+          price: 12900,
+          cycle: "build",
+          featured: true,
+          features: [
+            "Everything in Vanguard",
+            "Python API",
+            "TypeScript API",
+            "Java API",
+            "Product structure export"
+          ]
+        },
+        {
+          id: "dynasty",
+          name: "Dynasty",
+          tagline: "Private implementation, tuning, and conversion support.",
+          price: 29500,
+          cycle: "quarter",
+          features: [
+            "Everything in Sovereign",
+            "Offer ladder tuning",
+            "Analytics alignment",
+            "Deployment support",
+            "Priority iteration"
+          ]
+        }
+      ],
+      kpis: [
+        "lead score",
+        "projected net revenue",
+        "offer recommendation",
+        "confidence index"
+      ]
+    };
+
+    const PYTHON_SERVER = String.raw`import re
+import uuid
+from datetime import datetime, timezone
+from typing import Any, Dict, List
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+
+EMAIL_PATTERN = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+
+app = FastAPI(title="Aurum Conversion API", version="1.0.0")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+LEADS: List[Dict[str, Any]] = []
+ORDERS: List[Dict[str, Any]] = []
+
+
+class LeadPayload(BaseModel):
+    name: str = Field(min_length=1, max_length=120)
+    email: str = Field(min_length=5, max_length=254)
+    budget: float = Field(default=0, ge=0)
+    urgency: int = Field(default=5, ge=1, le=10)
+    authority: int = Field(default=5, ge=1, le=10)
+    source: str = Field(default="web")
+
+
+class OrderPayload(BaseModel):
+    offer_id: str = Field(min_length=1, max_length=60)
+    lead_id: str = Field(min_length=1, max_length=60)
+    amount: float = Field(ge=0)
+
+
+def score_lead(payload: LeadPayload) -> int:
+    budget_score = min(payload.budget / 100000, 1) * 40
+    urgency_score = payload.urgency / 10 * 30
+    authority_score = payload.authority / 10 * 20
+    email_score = 10 if re.match(EMAIL_PATTERN, payload.email) else 0
+    return int(round(budget_score + urgency_score + authority_score + email_score))
+
+
+@app.get("/api/health")
+def health() -> Dict[str, str]:
+    return {"status": "ok", "service": "aurum-conversion-api"}
+
+
+@app.post("/api/leads", status_code=201)
+def create_lead(payload: LeadPayload) -> Dict[str, Any]:
+    if not re.match(EMAIL_PATTERN, payload.email):
+        raise HTTPException(status_code=422, detail="email must be valid")
+    lead = {
+        "id": str(uuid.uuid4()),
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "score": score_lead(payload),
+        **payload.dict(),
+    }
+    LEADS.append(lead)
+    return lead
+
+
+@app.get("/api/leads")
+def list_leads() -> List[Dict[str, Any]]:
+    return LEADS
+
+
+@app.post("/api/orders", status_code=201)
+def create_order(payload: OrderPayload) -> Dict[str, Any]:
+    if not any(item["id"] == payload.lead_id for item in LEADS):
+        raise HTTPException(status_code=404, detail="lead not found")
+    order = {
+        "id": str(uuid.uuid4()),
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        **payload.dict(),
+    }
+    ORDERS.append(order)
+    return order
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8001)
+`;
+
+    const TYPESCRIPT_SERVER = String.raw`declare const require: (id: string) => any;
+declare const process: any;
+declare const console: any;
+
+const http = require("http");
+
+interface LeadPayload {
+  name: string;
+  email: string;
+  budget: number;
+  urgency: number;
+  authority: number;
+  source: string;
+}
+
+interface StoredLead extends LeadPayload {
+  id: string;
+  createdAt: string;
+  score: number;
+}
+
+type RouteContext = {
+  method: string;
+  pathname: string;
+};
+
+const PORT = Number(process.env.PORT || 8002);
+const EMAIL_PATTERN = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+const leads: StoredLead[] = [];
+
+function uuid(): string {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = Math.random() * 16;
+    const v = c === "x" ? r : (r % 16) | 8;
+    return Math.floor(v).toString(16);
+  });
+}
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(max, Math.max(min, value));
+}
+
+function scoreLead(payload: LeadPayload): number {
+  const budgetScore = Math.min(payload.budget / 100000, 1) * 40;
+  const urgencyScore = clamp(payload.urgency, 1, 10) / 10 * 30;
+  const authorityScore = clamp(payload.authority, 1, 10) / 10 * 20;
+  const emailScore = EMAIL_PATTERN.test(payload.email) ? 10 : 0;
+  return Math.round(budgetScore + urgencyScore + authorityScore + emailScore);
+}
+
+function normalizeLead(input: any): LeadPayload {
+  return {
+    name: String(input.name || "Anonymous"),
+    email: String(input.email || ""),
+    budget: Number(input.budget || 0),
+    urgency: clamp(Number(input.urgency || 5), 1, 10),
+    authority: clamp(Number(input.authority || 5), 1, 10),
+    source: String(input.source || "web")
+  };
+}
+
+function json(res: any, statusCode: number, body: any): void {
+  const payload = JSON.stringify(body);
+  res.writeHead(statusCode, {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+  });
+  res.end(payload);
+}
+
+function readBody(req: any): Promise<string> {
+  return new Promise(function (resolve, reject) {
+    let data = "";
+    req.on("data", function (chunk: any) {
+      data += chunk.toString("utf8");
+    });
+    req.on("end", function () {
+      resolve(data);
+    });
+    req.on("error", reject);
+  });
+}
+
+const server = http.createServer(async function (req: any, res: any) {
+  const urlPath = String(req.url || "/").split("?")[0];
+  const context: RouteContext = { method: req.method, pathname: urlPath };
+
+  if (context.method === "OPTIONS") {
+    json(res, 204, {});
+    return;
+  }
+
+  if (context.method === "GET" && context.pathname === "/api/health") {
+    json(res, 200, { status: "ok", service: "aurum-typescript-api" });
+    return;
+  }
+
+  if (context.method === "GET" && context.pathname === "/api/leads") {
+    json(res, 200, leads);
+    return;
+  }
+
+  if (context.method === "POST" && context.pathname === "/api/leads") {
+    try {
+      const raw = await readBody(req);
+      const parsed = raw ? JSON.parse(raw) : {};
+      const leadPayload = normalizeLead(parsed);
+      if (!EMAIL_PATTERN.test(leadPayload.email)) {
+        json(res, 422, { detail: "email must be valid" });
+        return;
+      }
+      const stored: StoredLead = {
+        ...leadPayload,
+        id: uuid(),
+        createdAt: new Date().toISOString(),
+        score: scoreLead(leadPayload)
+      };
+      leads.push(stored);
+      json(res, 201, stored);
+    } catch (error) {
+      json(res, 400, { detail: "invalid JSON payload" });
+    }
+    return;
+  }
+
+  json(res, 404, { detail: "route not found" });
+});
+
+server.listen(PORT, function () {
+  console.log("Aurum TypeScript API listening on port " + PORT);
+});
+`;
+
+    const JAVA_SERVER = String.raw`import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpServer;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class Main {
+    private static final Map<String, String> LEADS = new ConcurrentHashMap<>();
+    private static final List<String> LEAD_ORDER = Collections.synchronizedList(new ArrayList<>());
+
+    public static void main(String[] args) throws IOException {
+        int port = 8003;
+        if (args.length > 0) {
+            port = Integer.parseInt(args[0]);
+        }
+        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        server.createContext("/api/health", Main::health);
+        server.createContext("/api/leads", Main::leads);
+        server.setExecutor(null);
+        server.start();
+        System.out.println("Aurum Java API listening on port " + port);
+    }
+
+    private static void health(HttpExchange exchange) throws IOException {
+        String body = "{" + quote("status") + ":" + quote("ok") + "," + quote("service") + ":" + quote("aurum-java-api") + "}";
+        sendJson(exchange, 200, body);
+    }
+
+    private static void leads(HttpExchange exchange) throws IOException {
+        String method = exchange.getRequestMethod();
+        if ("GET".equalsIgnoreCase(method)) {
+            StringBuilder body = new StringBuilder("[");
+            synchronized (LEAD_ORDER) {
+                for (int i = 0; i < LEAD_ORDER.size(); i++) {
+                    if (i > 0) {
+                        body.append(",");
+                    }
+                    body.append(LEADS.get(LEAD_ORDER.get(i)));
+                }
+            }
+            body.append("]");
+            sendJson(exchange, 200, body.toString());
+            return;
+        }
+        if ("POST".equalsIgnoreCase(method)) {
+            String raw = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+            String id = UUID.randomUUID().toString();
+            String record = "{" + quote("id") + ":" + quote(id) + "," + quote("createdAt") + ":" + quote(Instant.now().toString()) + "," + quote("payload") + ":" + quote(escapeJson(raw.trim())) + "}";
+            LEADS.put(id, record);
+            LEAD_ORDER.add(id);
+            sendJson(exchange, 201, record);
+            return;
+        }
+        sendJson(exchange, 405, "{" + quote("detail") + ":" + quote("method not allowed") + "}");
+    }
+
+    private static void sendJson(HttpExchange exchange, int status, String body) throws IOException {
+        byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().add("Content-Type", "application/json");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+        exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+        exchange.sendResponseHeaders(status, bytes.length);
+        try (OutputStream os = exchange.getResponseBody()) {
+            os.write(bytes);
+        }
+    }
+
+    private static String quote(String value) {
+        StringBuilder sb = new StringBuilder();
+        sb.append((char) 34);
+        sb.append(value);
+        sb.append((char) 34);
+        return sb.toString();
+    }
+
+    private static String escapeJson(String value) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            int code = (int) c;
+            if (code == 34) {
+                sb.append((char) 92);
+                sb.append((char) 34);
+            } else if (code == 92) {
+                sb.append((char) 92);
+                sb.append((char) 92);
+            } else if (code == 10) {
+                sb.append((char) 92);
+                sb.append('n');
+            } else if (code == 13) {
+                sb.append((char) 92);
+                sb.append('r');
+            } else if (code == 9) {
+                sb.append((char) 92);
+                sb.append('t');
+            } else if (code < 32) {
+                sb.append((char) 92);
+                sb.append(String.format("u%04x", code));
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+}
+`;
+
+    const README = String.raw`AURUM CONVERSION OS
+
+This bundle contains a combined front-end page, a JSON product structure, and backend implementations.
+
+Run front-end:
+Open index.html in a browser.
+Use Download Project ZIP on the page to regenerate the bundle.
+
+Run Python API:
+cd python
+python -m uvicorn server:app --host 0.0.0.0 --port 8001
+
+Run TypeScript API:
+cd typescript
+npx tsc api-server.ts --target ES2020 --module commonjs
+node api-server.js
+
+Run Java API:
+cd java
+javac Main.java
+java Main
+
+Product structure:
+product-structure.json is the canonical offer tree.
+
+References
+
+Microsoft. (n.d.). TypeScript documentation. Retrieved August 25, 2026, from https://www.typescriptlang.org/docs/
+Mozilla Developer Network. (n.d.). JavaScript. Retrieved August 25, 2026, from https://developer.mozilla.org/en-US/docs/Web/JavaScript
+Oracle. (n.d.). Java 21 documentation. Retrieved August 25, 2026, from https://docs.oracle.com/en/java/javase/21/
+Python Software Foundation. (n.d.). Python 3 documentation. Retrieved August 25, 2026, from https://docs.python.org/3/
+Ramírez, S. (n.d.). FastAPI. Retrieved August 25, 2026, from https://fastapi.tiangolo.com/
+WHATWG. (n.d.). HTML Living Standard. Retrieved August 25, 2026, from https://html.spec.whatwg.org/
+`;
+
+    const encoder = new TextEncoder();
+
+    const CRC_TABLE = (() => {
+      const table = new Uint32Array(256);
+      for (let n = 0; n < 256; n++) {
+        let c = n;
+        for (let k = 0; k < 8; k++) {
+          c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+        }
+        table[n] = c >>> 0;
+      }
+      return table;
+    })();
+
+    function crc32(bytes) {
+      let crc = 0xFFFFFFFF;
+      for (let i = 0; i < bytes.length; i++) {
+        crc = CRC_TABLE[(crc ^ bytes[i]) & 0xFF] ^ (crc >>> 8);
+      }
+      return (crc ^ 0xFFFFFFFF) >>> 0;
+    }
+
+    function dosDateTime(date = new Date()) {
+      const time = ((date.getHours() << 11) | (date.getMinutes() << 5) | (date.getSeconds() >> 1)) & 0xFFFF;
+      const year = Math.max(1980, date.getFullYear());
+      const dateValue = (((year - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate()) & 0xFFFF;
+      return { time, date: dateValue };
+    }
+
+    function createZip(files) {
+      const chunks = [];
+      const central = [];
+      let offset = 0;
+      const stamp = dosDateTime(new Date());
+
+      for (const file of files) {
+        const nameBytes = encoder.encode(file.name);
+        const data = file.content instanceof Uint8Array ? file.content : encoder.encode(String(file.content));
+        const crc = crc32(data);
+
+        const local = new Uint8Array(30 + nameBytes.length);
+        const view = new DataView(local.buffer);
+        view.setUint32(0, 0x04034b50, true);
+        view.setUint16(4, 20, true);
+        view.setUint16(6, 0, true);
+        view.setUint16(8, 0, true);
+        view.setUint16(10, stamp.time, true);
+        view.setUint16(12, stamp.date, true);
+        view.setUint32(14, crc, true);
+        view.setUint32(18, data.length, true);
+        view.setUint32(22, data.length, true);
+        view.setUint16(26, nameBytes.length, true);
+        view.setUint16(28, 0, true);
+        local.set(nameBytes, 30);
+
+        chunks.push(local, data);
+
+        const centralHeader = new Uint8Array(46 + nameBytes.length);
+        const centralView = new DataView(centralHeader.buffer);
+        centralView.setUint32(0, 0x02014b50, true);
+        centralView.setUint16(4, 20, true);
+        centralView.setUint16(6, 20, true);
+        centralView.setUint16(8, 0, true);
+        centralView.setUint16(10, 0, true);
+        centralView.setUint16(12, stamp.time, true);
+        centralView.setUint16(14, stamp.date, true);
+        centralView.setUint32(16, crc, true);
+        centralView.setUint32(20, data.length, true);
+        centralView.setUint32(24, data.length, true);
+        centralView.setUint16(28, nameBytes.length, true);
+        centralView.setUint16(30, 0, true);
+        centralView.setUint16(32, 0, true);
+        centralView.setUint16(34, 0, true);
+        centralView.setUint16(36, 0, true);
+        centralView.setUint32(38, 0, true);
+        centralView.setUint32(42, offset, true);
+        centralHeader.set(nameBytes, 46);
+
+        central.push(centralHeader);
+        offset += local.length + data.length;
+      }
+
+      const centralSize = central.reduce((sum, part) => sum + part.length, 0);
+      const eocd = new Uint8Array(22);
+      const eocdView = new DataView(eocd.buffer);
+      eocdView.setUint32(0, 0x06054b50, true);
+      eocdView.setUint16(4, 0, true);
+      eocdView.setUint16(6, 0, true);
+      eocdView.setUint16(8, files.length, true);
+      eocdView.setUint16(10, files.length, true);
+      eocdView.setUint32(12, centralSize, true);
+      eocdView.setUint32(16, offset, true);
+      eocdView.setUint16(20, 0, true);
+
+      return new Blob([...chunks, ...central, eocd], { type: "application/zip" });
+    }
+
+    function currentProjectFiles() {
+      const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      return [
+        { name: "aurum-conversion/index.html", content: encoder.encode(html) },
+        { name: "aurum-conversion/product-structure.json", content: encoder.encode(JSON.stringify(PRODUCT_STRUCTURE, null, 2)) },
+        { name: "aurum-conversion/python/server.py", content: encoder.encode(PYTHON_SERVER) },
+        { name: "aurum-conversion/typescript/api-server.ts", content: encoder.encode(TYPESCRIPT_SERVER) },
+        { name: "aurum-conversion/java/Main.java", content: encoder.encode(JAVA_SERVER) },
+        { name: "aurum-conversion/README.md", content: encoder.encode(README) }
+      ];
+    }
+
+    function downloadProjectZip() {
+      const blob = createZip(currentProjectFiles());
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "aurum-conversion-project.zip";
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      }).format(value || 0);
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function computeRevenueModel({ traffic, conversionRate, aov, repeatRate, margin }) {
+      const rate = clamp(conversionRate, 0, 100) / 100;
+      const firstPurchaseRevenue = Math.max(0, traffic) * rate * Math.max(0, aov);
+      const lifecycleMultiplier = 1 + (clamp(repeatRate, 0, 100) / 100) * 1.8;
+      const grossRevenue = firstPurchaseRevenue * lifecycleMultiplier;
+      const netRevenue = grossRevenue * (clamp(margin, 0, 100) / 100);
+      return { firstPurchaseRevenue, grossRevenue, netRevenue };
+    }
+
+    function recommendPlan(netRevenue) {
+      if (netRevenue >= 150000) return PRODUCT_STRUCTURE.offers[2];
+      if (netRevenue >= 50000) return PRODUCT_STRUCTURE.offers[1];
+      if (netRevenue >= 10000) return PRODUCT_STRUCTURE.offers[0];
+      return { name: "Starter Sprint", price: 0 };
+    }
+
+    function updateCalculator() {
+      const trafficEl = document.getElementById("traffic");
+      if (!trafficEl) return;
+
+      const traffic = parseFloat(trafficEl.value) || 0;
+      const conversionRate = parseFloat(document.getElementById("conversionRate").value) || 0;
+      const aov = parseFloat(document.getElementById("aov").value) || 0;
+      const repeatRate = parseFloat(document.getElementById("repeatRate").value) || 0;
+      const margin = parseFloat(document.getElementById("margin").value) || 0;
+
+      const model = computeRevenueModel({ traffic, conversionRate, aov, repeatRate, margin });
+
+      document.getElementById("firstRevenue").textContent = formatCurrency(model.firstPurchaseRevenue);
+      document.getElementById("grossRevenue").textContent = formatCurrency(model.grossRevenue);
+      document.getElementById("netRevenue").textContent = formatCurrency(model.netRevenue);
+      document.getElementById("planRecommendation").textContent = recommendPlan(model.netRevenue).name;
+
+      const confidence = clamp(Math.round(
+        (traffic / 100000) * 35 +
+        (conversionRate > 0 ? 20 : 0) +
+        (aov > 0 ? 20 : 0) +
+        (repeatRate > 0 ? 15 : 0) +
+        (margin > 0 ? 10 : 0)
+      ), 5, 98);
+
+      document.getElementById("confidenceBar").style.width = confidence + "%";
+    }
+
+    function scoreLead(input) {
+      const budgetScore = Math.min(Math.max(input.budget, 0) / 100000, 1) * 40;
+      const urgencyScore = clamp(input.urgency, 1, 10) / 10 * 30;
+      const authorityScore = clamp(input.authority, 1, 10) / 10 * 20;
+      const emailScore = input.emailValid ? 10 : 0;
+      return Math.round(budgetScore + urgencyScore + authorityScore + emailScore);
+    }
+
+    function renderModules() {
+      const target = $("#moduleGrid");
+      if (!target) return;
+      target.innerHTML = PRODUCT_STRUCTURE.modules.map((module) =>
+        '<article class="card reveal"><h3>' + module.name + '</h3><p>' + module.detail + '</p></article>'
+      ).join("");
+    }
+
+    function renderOffers() {
+      const target = $("#offerGrid");
+      if (!target) return;
+
+      target.innerHTML = PRODUCT_STRUCTURE.offers.map((offer) => {
+        const features = offer.features.map((feature) => "<li>" + feature + "</li>").join("");
+        return '<article class="card offer-card panel reveal' + (offer.featured ? " featured" : "") + '">' +
+          (offer.featured ? '<div class="badge">Most requested</div>' : "") +
+          "<h3>" + offer.name + "</h3>" +
+          '<p class="tagline">' + offer.tagline + "</p>" +
+          '<div class="price">' + formatCurrency(offer.price) + '<span class="cycle">/' + offer.cycle + "</span></div>" +
+          '<ul class="feature-list">' + features + "</ul>" +
+          '<a class="btn ' + (offer.featured ? "btn-solid" : "btn-ghost") + '" href="#contact">Engage ' + offer.name + "</a>" +
+          "</article>";
+      }).join("");
+    }
+
+    function setupReveals() {
+      const elements = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window)) {
+        elements.forEach((el) => el.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+
+      elements.forEach((el) => observer.observe(el));
+    }
+
+    function initCanvas() {
+      const canvas = $("#luxCanvas");
+      if (!canvas) return;
+
+      const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion) return;
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      let particles = [];
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function createParticles() {
+        const count = Math.min(120, Math.floor(window.innerWidth / 12));
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.8 + 0.4,
+          vx: (Math.random() - 0.5) * 0.22,
+          vy: (Math.random() - 0.5) * 0.18,
+          alpha: Math.random() * 0.5 + 0.12
+        }));
+      }
+
+      function tick() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = "rgba(215, 179, 106," + p.alpha.toFixed(3) + ")";
+          ctx.fill();
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      resize();
+      createParticles();
+      tick();
+
+      window.addEventListener("resize", () => {
+        resize();
+        createParticles();
+      });
+    }
+
+    function bindLeadForm() {
+      const form = $("#leadForm");
+      if (!form) return;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const name = $("#leadName").value.trim();
+        const email = $("#leadEmail").value.trim();
+        const budget = parseFloat($("#leadBudget").value) || 0;
+        const urgency = parseFloat($("#leadUrgency").value) || 5;
+        const authority = parseFloat($("#leadAuthority").value) || 5;
+        const emailValid = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+        const result = $("#leadResult");
+
+        if (!name || !emailValid) {
+          result.textContent = "Name and valid email are required.";
+          return;
+        }
+
+        const score = scoreLead({ budget, urgency, authority, emailValid });
+        const nextAction = score >= 80
+          ? "Route to closer call."
+          : score >= 55
+            ? "Send premium case study and follow up."
+            : "Add to nurture sequence.";
+
+        result.textContent = "Lead score: " + score + "/100. " + nextAction;
+
+        const payload = { name, email, budget, urgency, authority, source: "luxury-page" };
+
+        if (window.location.protocol.startsWith("http")) {
+          try {
+            await fetch("/api/leads", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+            });
+          } catch (error) {}
+        }
+
+        try {
+          const saved = JSON.parse(localStorage.getItem("aurumLeads") || "[]");
+          saved.push({ ...payload, score, createdAt: new Date().toISOString() });
+          localStorage.setItem("aurumLeads", JSON.stringify(saved));
+        } catch (error) {}
+      });
+    }
+
+    renderModules();
+    renderOffers();
+    updateCalculator();
+    setupReveals();
+    initCanvas();
+    bindLeadForm();
+
+    const downloadButton = $("#downloadZip");
+    if (downloadButton) {
+      downloadButton.addEventListener("click", downloadProjectZip);
+    }
+  </script>
+</body>
+</html>
